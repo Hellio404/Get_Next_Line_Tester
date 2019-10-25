@@ -45,8 +45,8 @@ int main()
     TEST(100000000,"test/empty.txt",0,"empty file");
     TEST(1,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     TEST(1000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
+    TEST(100000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     TEST(1000000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
-    TEST(10000000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     
     
 }
