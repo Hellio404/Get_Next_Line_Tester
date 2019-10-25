@@ -1,2 +1,3 @@
 # GET NEXT LINE TESTER
-1 - EDIT Makefile PATH\n2 - Make
+1 - EDIT Makefile PATH\
+2 - Make
