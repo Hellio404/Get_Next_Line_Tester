@@ -27,10 +27,12 @@ int main()
     TEST(4,"test/normal.txt",0,"Normal FILE 10k");
     TEST(9999,"test/normal.txt",0,"Normal FILE 10k");
     TEST(100000000,"test/normal.txt",0,"Normal FILE 10k");
+    TEST(1000000000,"test/normal.txt",0,"Normal FILE 10k");
     TEST(1,"test/64bit_paragraph.txt",0,"64 character per line paragraph 6k");
     TEST(4,"test/64bit_paragraph.txt",0,"64 character per line paragraph 6k");
     TEST(9999,"test/64bit_paragraph.txt",0,"64 character per line paragraph 6k");
     TEST(100000000,"test/64bit_paragraph.txt",0,"64 character per line paragraph 6k");
+    TEST(1000000000,"test/64bit_paragraph.txt",0,"64 character per line paragraph 6k");
     TEST(100,"test/normal.txt",0,"64 character per line paragraph 6k");
     TEST(64,"test/64bit_line.txt",0,"64 character line");
     TEST(63,"test/64bit_line.txt",0,"64 character line");
@@ -38,11 +40,13 @@ int main()
     TEST(10,"test/long_line.txt",0,"10K character line");
     TEST(1000,"test/long_line.txt",0,"10K character line");
     TEST(100000000,"test/long_line.txt",0,"10K character line");
+    TEST(1000000000,"test/long_line.txt",0,"10K character line");
     TEST(1,"test/empty.txt",0,"empty file");
     TEST(100000000,"test/empty.txt",0,"empty file");
     TEST(1,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     TEST(1000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     TEST(1000000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
+    TEST(10000000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     
     
 }
