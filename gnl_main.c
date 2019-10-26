@@ -25,7 +25,7 @@ bool ok;
 	} \
 } while(0)
 
-#define TESTER_gnl(fileName,expected,exp_return,msg) do{\
+#define TESTER_gnl(fileName,expected,exp_return,msg,ln) do{\
         if (fd == -1)\
             printf("\033[1;31mError in Opening file!!\033[0m\n");\
         else{\
@@ -39,19 +39,37 @@ bool ok;
             if (fd == -1)\
                 printf("\033[1;31mError in Opening file!!\033[0m\n");\
             else{\
+                start = clock();\
                 retu = get_next_line(fd, &str_out);\
+                if (!str_out || !expected)\
+                {\
+                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT: \"%s\"\tEXPECTED : \"%s\"\t\t AT_LINE : %d\n","LINE KO",msg,BUFFER_SIZE,str_out,expected,ln);\
+                    return 0377;\
+                }\
+                if(strcmp(str_out,expected))\
+                {\
+                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT: \"%s\"\tEXPECTED : \"%s\"\t\t AT_LINE : %d\n","LINE KO",msg,BUFFER_SIZE,str_out,expected,ln);\
+                    return 0377;\
+                }\
                 if (retu != exp_return)\
                 {\
-                   /* TODO:::::::::::::: RETURN EXPECTED */\
-                }\
-                else if(strcmp(str_out,expected))\
-                {\
-                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%d\n","LINE KO",msg,BUFFER_SIZE);\
+                   printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT : %d\tEXPECTED : %d \t\tAT LINE : %d\n","RETURN KO",msg,BUFFER_SIZE,retu,exp_return,ln);\
                     return 0377;\
                 }\
             }\
         }\
         }}while(0)
+
+int count_line(char *s)
+{
+    FILE *fp = fopen(s,"r");
+    char *str = malloc(1);
+    size_t i;
+    int count = 0;
+    while(getline(&str,&i,fp) >= 0)
+        count++;
+    return count + 1;
+}
 
 int main(int ac, char **av) 
 {   
@@ -66,23 +84,32 @@ int main(int ac, char **av)
         printf("\033[1;31mCould not open file %s\n", av[1]); 
         return 0; 
     } 
-
+    if (n_time <= 0)
+        n_time = count_line(av[1]);
     char *buffer_expected = NULL;
     size_t buffer_size = 0;
     int return_expected = 0;
+    int line_number = 1;
     clock_t start = clock();
-    for (int i = 0; n_time > 0 ? i <  n_time : (retu && return_expected >= 0); i++)
+    bool whatever;
+    for (int i = 1; i <= n_time ; i++)
     {
+        whatever = false;
         return_expected = getline(&buffer_expected, &buffer_size, fp);
         if(buffer_expected[return_expected - 1] == '\n')
+        {
             buffer_expected[return_expected - 1] = 0;
-        return_expected = return_expected > 0 ? 1 : 0;
-        TESTER_gnl(av[1], buffer_expected, return_expected,av[3]);
-        if (((double)clock() - start) / (double)CLOCKS_PER_SEC > 3.0)
+            whatever = true;
+        }
+        return_expected = return_expected  > 0 || whatever ? 1 : 0;
+        return_expected = (i == n_time - 1 && !whatever)  ? 0 : return_expected;
+        TESTER_gnl(av[1], buffer_expected, return_expected,av[3],line_number);
+        line_number++;
+        if (((double)clock() - start) / (double)CLOCKS_PER_SEC > 5.0)
         {
             printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%d\n","TIME OUT",av[3],BUFFER_SIZE);
             return 0377;
-        }
+        }    
     }
     printf("\033[0;32m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%d\n","OK",av[3],BUFFER_SIZE);
     return 0;
