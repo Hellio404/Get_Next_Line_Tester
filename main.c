@@ -21,7 +21,7 @@ int  count_nat()
 int main()
 {
     char tmp[255];
-    /*1 --> BUFFER_SIZE,  2 --> FILE_PATH,  3  --> EXPECTED TO READ,  4 -->  EXPECTED TO RETURN*/
+    /*1 --> BUFFER_SIZE,  2 --> FILE_PATH,  3  --> NUMBER OF LINE TO READ (0 TO READ TO THE END),  4 -->  DESCRIPTION*/
 
     
     TEST(1,"test/normal.txt",0,"Normal FILE 10k");
