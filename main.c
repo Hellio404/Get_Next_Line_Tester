@@ -38,9 +38,12 @@ int main()
     TEST(1000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     TEST(100000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
     TEST(1000000000,"test/fewchar_perline.txt",0,"Short Line < 5 character");
-    TEST(250,"test/bar.txt",2000,"Short Line < 5 character");
-    TEST(100000,"test/bar.txt",2000,"Short Line < 5 character");
-    TEST(1000000000,"test/bar.txt",2000,"Short Line < 5 character");
+    TEST(250,"test/bar.txt",2000,"Read 2k Lines from bar.txt");
+    TEST(100000,"test/bar.txt",2000,"Read 2k Lines from bar.txt");
+    TEST(1000000000,"test/bar.txt",2000,"Read 2k Lines from bar.txt");
+    TEST(1,"test/only_newline.txt",0,"Only new lines file");
+    TEST(100,"test/only_newline.txt",0,"Only new lines file");
+    TEST(1000000000,"test/only_newline.txt",0,"Only new lines file");
 
     
 }
