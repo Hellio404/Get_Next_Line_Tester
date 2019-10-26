@@ -8,16 +8,6 @@
     system(tmp);\
     }while(0)\
 
-int  count_nat()
-{
-    char st[] = ILOVESPLIT;
-    int i = 0;
-    int count = 0;
-    while(st[i])
-        if (st[i++] == '\n')
-            count++;
-    return (count);
-}
 int main()
 {
     char tmp[255];
