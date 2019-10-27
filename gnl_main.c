@@ -39,20 +39,22 @@ bool ok;
             if (fd == -1)\
                 printf("\033[1;31mError in Opening file!!\033[0m\n");\
             else{\
+                start =  clock();\
                 retu = get_next_line(fd, &str_out);\
+                time += ((double)clock() - start) / (double)CLOCKS_PER_SEC;\
                 if (!str_out || !expected)\
                 {\
-                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT: \"%s\"\tEXPECTED : \"%s\"\t\t AT_LINE : %d\n","LINE KO",msg,BUFFER_SIZE,str_out,expected,ln);\
+                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT: \"%s\"\tEXPECTED : \"%s\"\t\t AT_LINE : %d\n","KO IN LINE",msg,BUFFER_SIZE,str_out,expected,ln);\
                     return 0377;\
                 }\
                 if(strcmp(str_out,expected))\
                 {\
-                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT: \"%s\"\tEXPECTED : \"%s\"\t\t AT_LINE : %d\n","LINE KO",msg,BUFFER_SIZE,str_out,expected,ln);\
+                    printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT: \"%s\"\tEXPECTED : \"%s\"\t\t AT_LINE : %d\n","KO IN LINE",msg,BUFFER_SIZE,str_out,expected,ln);\
                     return 0377;\
                 }\
                 if (retu != exp_return)\
                 {\
-                   printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT : %d\tEXPECTED : %d \t\tAT LINE : %d\n","RETURN KO",msg,BUFFER_SIZE,retu,exp_return,ln);\
+                   printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15dOUT : %d\tEXPECTED : %d \t\tAT LINE : %d\n","KO IN RETURN",msg,BUFFER_SIZE,retu,exp_return,ln);\
                     return 0377;\
                 }\
             }\
@@ -72,9 +74,9 @@ int count_line(char *s)
 
 int main(int ac, char **av) 
 {   
-    setbuf(stdout, NULL);
     int n_time = atoi(av[2]);
     int k;
+    double time = 0;
     // OPEN THE FILE
     FILE *fp = fopen(av[1], "r"); 
     fd = open(av[1],O_RDONLY);
@@ -89,7 +91,7 @@ int main(int ac, char **av)
     size_t buffer_size = 0;
     int return_expected = 0;
     int line_number = 1;
-    clock_t start = clock();
+    clock_t start;
     bool whatever;
     for (int i = 1; i <= n_time ; i++)
     {
@@ -104,14 +106,13 @@ int main(int ac, char **av)
         return_expected = (i == n_time - 1 && !whatever)  ? 0 : return_expected;
         TESTER_gnl(av[1], buffer_expected, return_expected,av[3],line_number);
         line_number++;
-        if (((double)clock() - start) / (double)CLOCKS_PER_SEC > 3.0)
+        if (time > 1)
         {
             printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%d\n","TIME OUT",av[3],BUFFER_SIZE);
             return 0377;
         }    
     }
-    printf("\033[0;32m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15d Time : %lfs\n","OK",av[3],BUFFER_SIZE,
-    ((double)clock() - start) / (double)CLOCKS_PER_SEC);
+    printf("\033[0;32m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-18d\033[0;33mTime :\e[1;0m %lfs\n","OK",av[3],BUFFER_SIZE,time);
     return 0;
   
     

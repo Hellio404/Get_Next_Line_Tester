@@ -24,7 +24,8 @@ int main()
     char tmp[255];
     /*1 --> BUFFER_SIZE,  2 --> FILE_PATH,  3  --> NUMBER OF LINE TO READ (0 TO READ TO THE END),  4 -->  DESCRIPTION*/
     char *tests[] = {"test/normal.txt", "test/64bit_paragraph.txt", "test/64bit_line.txt", "test/long_line.txt", "test/empty.txt", "test/fewchar_perline.txt", "test/only_newline.txt",NULL};
-    char *desri[] = {"Normal FILE 10k", "64 character per line paragraph 6k", "64 character line", "10K character line", "empty file", "Short Line < 5 character","Only new lines file",NULL};
+    //char *desri[] = {"Normal FILE 10k", "64 character per line paragraph 6k", "64 character line", "10K character line", "empty file", "Short Line < 5 character","Only new lines file",NULL};
+    char **desri = tests;
     int size = size_of_arr(tests);
     TEST(1,tests,size, 0,desri);
     TEST(64,tests,size, 0,desri);
