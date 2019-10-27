@@ -40,6 +40,8 @@ int main()
     system("gcc gnl_cpy/*.c mem_check_main.c -D BUFFER_SIZE=500 -o mem_check && bash memory_leak.sh");
     printf("\nCHECK READING FORM STDIN : ");
     system("gcc gnl_cpy/*.c main_stdin.c -D BUFFER_SIZE=500 -o std_check && bash stdin_check.sh");
+    printf("\nCHECK ONE STATIC VARIABLE :");
+    system("bash ./bounus_one_static.sh");
  
     
 }
