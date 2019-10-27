@@ -39,7 +39,6 @@ bool ok;
             if (fd == -1)\
                 printf("\033[1;31mError in Opening file!!\033[0m\n");\
             else{\
-                start = clock();\
                 retu = get_next_line(fd, &str_out);\
                 if (!str_out || !expected)\
                 {\
@@ -105,13 +104,14 @@ int main(int ac, char **av)
         return_expected = (i == n_time - 1 && !whatever)  ? 0 : return_expected;
         TESTER_gnl(av[1], buffer_expected, return_expected,av[3],line_number);
         line_number++;
-        if (((double)clock() - start) / (double)CLOCKS_PER_SEC > 5.0)
+        if (((double)clock() - start) / (double)CLOCKS_PER_SEC > 3.0)
         {
             printf("\033[0;31m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%d\n","TIME OUT",av[3],BUFFER_SIZE);
             return 0377;
         }    
     }
-    printf("\033[0;32m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%d\n","OK",av[3],BUFFER_SIZE);
+    printf("\033[0;32m%-15s\033[0;33mFILE_NAME :\033[0;34m %-50s \033[0;33mBUFFER_SIZE : \033[1;0m%-15d Time : %lfs\n","OK",av[3],BUFFER_SIZE,
+    ((double)clock() - start) / (double)CLOCKS_PER_SEC);
     return 0;
   
     
