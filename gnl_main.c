@@ -5,10 +5,8 @@
 #include "gnl_cpy/get_next_line.h"
 #include<string.h>
 #include<time.h>
-#include<stdlib.h>
 int  fd;
 int  fd_seg;
-char *tmp;
 char *str_out;
 int retu = 1;
 pid_t pid;
@@ -75,8 +73,8 @@ int count_line(char *s)
 
 int main(int ac, char **av) 
 {   
+    ac = 0;
     int n_time = atoi(av[2]);
-    int k;
     double time = 0;
     // OPEN THE FILE
     FILE *fp = fopen(av[1], "r"); 
