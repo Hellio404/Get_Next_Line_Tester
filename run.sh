@@ -6,6 +6,6 @@ if [ $check -gt 0 ]; then
 else
     ./a.out
     rm ./a.out
-    make
+    make kk
 fi
 rm -f cmp_error.txt
