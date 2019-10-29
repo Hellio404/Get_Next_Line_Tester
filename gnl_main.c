@@ -5,6 +5,7 @@
 #include "gnl_cpy/get_next_line.h"
 #include<string.h>
 #include<time.h>
+#include<stdlib.h>
 int  fd;
 int  fd_seg;
 char *tmp;
