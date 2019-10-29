@@ -5,7 +5,10 @@ NAME_SUB = run_out
 DIR_CPY = gnl_cpy
 CC = gcc
 
-all:  $(NAME) f 
+all:  
+	echo "use \"bash run.sh\""
+
+kk: $(NAME) f
 f:
 	@./$(NAME)
 	@rm -rf $(DIR_CPY)
