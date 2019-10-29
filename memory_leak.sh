@@ -15,5 +15,7 @@ then
 	fi
 	rm -rf msg.c msg_out
 else
-	echo "ERROR IN 'valgrind' COMMAND TRY TO INSTALL IT OR FIX IT"
+	echo "INSTALLING VALGRIND ....   "
+	sh install_valgrind.sh
+	sh memory_leak.sh
 fi
