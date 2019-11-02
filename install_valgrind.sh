@@ -8,4 +8,4 @@ then
   brew help
 fi
 rm brew_check
-brew valgrind
+brew install valgrind
