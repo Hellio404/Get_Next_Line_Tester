@@ -15,7 +15,5 @@ then
 	fi
 	rm -rf msg.c msg_out
 else
-	echo "INSTALLING VALGRIND ....   "
-	sh install_valgrind.sh
-	sh memory_leak.sh
+	echo "INSTAL VALGRIND USING BREW FIRST ...."
 fi
