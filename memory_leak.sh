@@ -15,5 +15,5 @@ then
 	fi
 	rm -rf msg.c msg_out
 else
-	echo "PLEASE INSTAL VALGRIND USING BREW FIRST"
+	echo "PLEASE INSTALL VALGRIND USING BREW FIRST"
 fi
